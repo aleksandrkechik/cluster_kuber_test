@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>cluster_kuber_test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <APP_CONFIG>application.conf</APP_CONFIG>
+        <scala.base.version>2.12</scala.base.version>
+        <scala.version>${scala.base.version}.11</scala.version>
+        <scalatest.version>3.2.11</scalatest.version>
+        <scala.plugin.version>3.2.0</scala.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.plugin.version>3.3.3</scala.plugin.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <logback.version>1.2.7</logback.version>
+        <scala-logging.version>3.1.0</scala-logging.version>
+        <akka.version>2.6.14</akka.version>
+        <akka.http.version>10.2.7</akka.http.version>
+        <akka-stream-kafka.version>2.0.6</akka-stream-kafka.version>
+        <akka-management.version>1.1.3</akka-management.version>
+        <kafka.version>2.5.0</kafka.version>
+        <circe-generic.version>0.13.0</circe-generic.version>
+        <sangria-akka-http-circe_2.12.version>0.0.2</sangria-akka-http-circe_2.12.version>
+        <scalikejdbc.version>4.0.0</scalikejdbc.version>
+        <postgres.version>42.2.18</postgres.version>
+    </properties>
+
+    <dependencies>
+    <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest_${scala.base.version}</artifactId>
+        <version>${scalatest.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+            </exclusion>
+        </exclusions>
+        <scope>test</scope>
+    </dependency>
+    <!--        Slf4j-->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+    <!--        PostgreSQL-->
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgres.version}</version>
+    </dependency>
+    <!--        Kafka-->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-stream-kafka_${scala.base.version}</artifactId>
+        <version>${akka-stream-kafka.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <!--AKKA -->
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-actor_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-testkit_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-stream-testkit_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-stream_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-slf4j_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-serialization-jackson_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>de.heikoseeberger</groupId>
+        <artifactId>akka-http-circe_${scala.base.version}</artifactId>
+        <version>1.35.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http_${scala.base.version}</artifactId>
+        <version>${akka.http.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-http-testkit_${scala.base.version}</artifactId>
+        <version>${akka.http.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-persistence_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-persistence-query_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-persistence-typed_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.lightbend.akka</groupId>
+        <artifactId>akka-persistence-jdbc_${scala.base.version}</artifactId>
+        <version>5.0.4</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-persistence-testkit_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-cluster-typed_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-cluster-sharding-typed_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-discovery_${scala.base.version}</artifactId>
+        <version>${akka.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.lightbend.akka.management</groupId>
+        <artifactId>akka-management-cluster-bootstrap_${scala.base.version}</artifactId>
+        <version>${akka-management.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.lightbend.akka</groupId>
+        <artifactId>akka-projection-eventsourced_${scala.base.version}</artifactId>
+        <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.lightbend.akka</groupId>
+        <artifactId>akka-projection-jdbc_${scala.base.version}</artifactId>
+        <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.lightbend.akka</groupId>
+        <artifactId>akka-projection-testkit_${scala.base.version}</artifactId>
+        <version>1.2.3</version>
+        <scope>test</scope>
+    </dependency>
+    <!-- ScalikeJDBC -->
+    <dependency>
+        <groupId>org.scalikejdbc</groupId>
+        <artifactId>scalikejdbc_${scala.base.version}</artifactId>
+        <version>${scalikejdbc.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.scalikejdbc</groupId>
+        <artifactId>scalikejdbc-config_${scala.base.version}</artifactId>
+        <version>${scalikejdbc.version}</version>
+    </dependency>
+    <!-- Circe -->
+    <!-- https://mvnrepository.com/artifact/io.circe/circe-generic -->
+    <dependency>
+        <groupId>io.circe</groupId>
+        <artifactId>circe-generic_${scala.base.version}</artifactId>
+        <version>${circe-generic.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.circe/circe-parser -->
+    <dependency>
+        <groupId>io.circe</groupId>
+        <artifactId>circe-parser_${scala.base.version}</artifactId>
+        <version>${circe-generic.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.circe/circe-parser -->
+    <dependency>
+        <groupId>io.circe</groupId>
+        <artifactId>circe-generic-extras_${scala.base.version}</artifactId>
+        <version>${circe-generic.version}</version>
+    </dependency>
+
+    <!-- HicariCP -->
+    <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>5.0.1</version>
+    </dependency>
+
+    <!-- Sangria -->
+    <dependency>
+        <groupId>org.sangria-graphql</groupId>
+        <artifactId>sangria_${scala.base.version}</artifactId>
+        <version>2.1.6</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.sangria-graphql</groupId>
+        <artifactId>sangria-circe_${scala.base.version}</artifactId>
+        <version>1.3.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.sangria-graphql</groupId>
+        <artifactId>sangria-akka-http-core_${scala.base.version}</artifactId>
+        <version>${sangria-akka-http-circe_2.12.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.sangria-graphql</groupId>
+        <artifactId>sangria-akka-http-circe_${scala.base.version}</artifactId>
+        <version>${sangria-akka-http-circe_2.12.version}</version>
+    </dependency>
+    <!--        &lt;!&ndash; Jackson ZonedDateTime &ndash;&gt;-->
+    <!--        <dependency>-->
+    <!--            <groupId>com.fasterxml.jackson.datatype</groupId>-->
+    <!--            <artifactId>jackson-datatype-jsr310</artifactId>-->
+    <!--            <version>2.13.2</version>-->
+    <!--        </dependency>-->
+    <!-- Gson -->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>1.7.1</version>
+    </dependency>
+    <!-- Alpakka -->
+    <dependency>
+        <groupId>com.lightbend.akka</groupId>
+        <artifactId>alpakka_${scala.base.version}</artifactId>
+        <version>1.0-M2</version>
+    </dependency>
+</dependencies>
+</project>
